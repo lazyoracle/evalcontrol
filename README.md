@@ -37,12 +37,13 @@ To use this package on windows, you need to install a port of the libusb driver.
  2. copy `libusb0.dll` to C:\Windows\System32
  3. copy `libusb0.sys` to C:\Windows\System32\drivers
  4. add a filter for the AD9959 using the `install-filter-win` utility
- 
+
+
 ## To-Do
- * python-raspbian-env
- * def compute_ftw
- * def set_ftw
- * def push_ftw
- * def compute_ACR
- * def set_amplitude
+ * python-raspbian-env 
+ * def compute_ftw 
+ * def set_ftw 
+ * def push_ftw 
+ * def compute_ACR 
+ * def set_amplitude 
  * def push_ACR

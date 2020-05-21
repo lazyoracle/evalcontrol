@@ -336,7 +336,7 @@ class AD9959(object):
 
         return message_channel_select, message_frequency_word
 
-    def set_precomputed_frequency(self, message_channel_select, message_frequency_word):
+    def set_precomputed_frequency(message_channel_select, message_frequency_word):
         """This method sets the frequency from precomputed byte-encoded words.
 
         The input for this method should be the ouput of self.precompute_frequency_word.
@@ -390,96 +390,17 @@ class AD9959(object):
         # set the frequency word in the frequency register
         frequency_word = ''.join(' 0' + b for b in fraction_bin)
         frequency_word = frequency_word[1:]
-        print(len(frequency_word))
-        print(frequency_word)
         if channel_word == 0:
             self._write_to_dds_register(0x04, frequency_word)
         else:
             register = channel_word - 1 + 0x0A
             self._write_to_dds_register(register, frequency_word)
-            
 
 
         # load and update I/O
         self._load_IO()
         if self.auto_update:
             self._update_IO()
-
-    def compute_ftw(self, frequency):
-        """Sets a new frequency for a given channel.
-
-        :frequency: float
-            The new frequency in Hz. Should not exceed `system_clock_frequency`.
-        
-        """
-
-        # calculate the fraction of the full frequency
-        fraction = frequency/self.system_clock_frequency
-        fraction_bin = bin(int(round(fraction * (2**32 - 1)))).lstrip('0b') # full range are 32 bit
-        if len(fraction_bin) < 32:
-            fraction_bin = (32-len(fraction_bin)) * '0' + fraction_bin
-        closest_possible_value = (int(fraction_bin, base=2)/(2**32 -1) *
-                                    self.system_clock_frequency)
-        #print('Setting frequency of channel {1}:{2} to closest possible value {0}MHz'.format(
-        #                                                closest_possible_value/1e6, channel, channel_word))
-
-        # set the frequency word in the frequency register
-        frequency_word = ''.join(' 0' + b for b in fraction_bin)
-        frequency_word = frequency_word[1:]
-        return frequency_word
-
-
-    def set_ftw(self, ftw, channel=None):
-        """Sets a new frequency tuning word for a given channel.
-
-        :ftw: string
-            The new 32 bit frequency tuning word as a string of length (32*3)-1.
-        :channel: int or seq
-            Channel(s) for which the frequency should be set.
-        
-        """
-
-        if channel is None:
-            channel = self.channel
-        
-        # select the chosen channels
-        self._channel_select(channel)
-
-        # set the frequency word in the frequency register
-        #print(ftw)
-        self._write_to_dds_register(0x04, ftw)
-        
-        # load and update I/O
-        self._load_IO()
-        if self.auto_update:
-            self._update_IO()
-
-    def set_ACR(self, ACR_values, channel=None):
-        """Sets a new output amplitude for a given channel.
-
-        :ACR_values: string
-            The new amplitude tuning word as a string of length (24*3)-1.
-        :channel: int or seq
-            Channel(s) for which the frequency should be set.
-        
-        """
-
-        if channel is None:
-            channel = self.channel
-        
-        # select the chosen channels
-        self._channel_select(channel)
-
-        # set the frequency word in the frequency register
-        #print(ACR_values)
-        self._write_to_dds_register(0x06, ACR_values)
-        
-        # load and update I/O
-        self._load_IO()
-        if self.auto_update:
-            self._update_IO()
-
-
 
     def set_phase(self, phase, channel=None):
         """Sets the phase offset for a given channel.
