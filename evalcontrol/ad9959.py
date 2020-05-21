@@ -5,14 +5,7 @@ import numpy as np
 
 from .customhandler import DeviceHandle
 
-#To-Do
-#python-raspbian-env
-#def compute_ftw
-#def set_ftw
-#def push_ftw
-#def compute_ACR
-#def set_amplitude
-#def push_ACR
+
 
 class AD9959(object):
     """This class emulates the AD9959 evaluation board for python.
