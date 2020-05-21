@@ -40,7 +40,7 @@ To use this package on windows, you need to install a port of the libusb driver.
 
 
 ## To-Do
- * python-raspbian-env 
+ * ~~python-raspbian-env~~
  * def compute_ftw 
  * def set_ftw 
  * def push_ftw 
