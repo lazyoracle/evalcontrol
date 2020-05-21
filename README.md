@@ -41,9 +41,9 @@ To use this package on windows, you need to install a port of the libusb driver.
 
 ## To-Do
  * ~~python-raspbian-env~~
- * def compute_ftw 
- * def set_ftw 
+ * ~~def compute_ftw~~ 
+ * ~~def set_ftw~~ 
  * def push_ftw 
  * def compute_ACR 
- * def set_amplitude 
+ * ~~def set_ACR~~ 
  * def push_ACR
