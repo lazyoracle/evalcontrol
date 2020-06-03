@@ -6,13 +6,13 @@ A python library to control the AD9959 DDS Evaluation Board. This library is bas
 ## Installation
 To install the package from source simply do
 ```
-git clone https://github.com/Schlabonski/evalcontrol`
+git clone <link to repo>
 cd evalcontrol
 python3 setup.py install
 ```
 
 *Requirements*: This library works on top of `pyusb` which uses `libusb` so these should both be installed as well.
-To install `liusb` on windows, see instructions below.
+To install `libusb` on windows, see instructions below.
 
 ## Use without sudo
 If you want to use the library, i.e. access the evaluation board, without root rights run the following steps first.
